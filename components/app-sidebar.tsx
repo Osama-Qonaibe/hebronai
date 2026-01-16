@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
 
-import { Plus, Info, FileText, BookOpen } from 'lucide-react'
+import { BookOpen, FileText, Info, Plus } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
@@ -44,7 +44,7 @@ export default function AppSidebar() {
             <SidebarMenuButton asChild>
               <Link href="/about" className="flex items-center gap-2">
                 <Info className="size-4" />
-                <span>من نحن</span>
+                <span>About</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -52,7 +52,7 @@ export default function AppSidebar() {
             <SidebarMenuButton asChild>
               <Link href="/terms" className="flex items-center gap-2">
                 <FileText className="size-4" />
-                <span>الشروط</span>
+                <span>Terms</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -60,7 +60,7 @@ export default function AppSidebar() {
             <SidebarMenuButton asChild>
               <Link href="/blog" className="flex items-center gap-2">
                 <BookOpen className="size-4" />
-                <span>المدونة</span>
+                <span>Blog</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
