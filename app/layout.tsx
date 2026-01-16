@@ -11,6 +11,7 @@ import { Toaster } from '@/components/ui/sonner'
 
 import AppSidebar from '@/components/app-sidebar'
 import ArtifactRoot from '@/components/artifact/artifact-root'
+import FloatingMenu from '@/components/floating-menu'
 import Header from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -88,6 +89,7 @@ export default async function RootLayout({
               </main>
             </div>
           </SidebarProvider>
+          {!user && <FloatingMenu />}
           <Toaster />
           <Analytics />
         </ThemeProvider>
