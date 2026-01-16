@@ -42,7 +42,7 @@ export default function BlogPage() {
   ]
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="w-full py-8 px-4 md:px-8">
       <div className="max-w-6xl mx-auto space-y-16">
         <section className="text-center space-y-4">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
