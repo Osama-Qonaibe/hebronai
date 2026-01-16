@@ -177,22 +177,31 @@ export function ChatPanel({
             onBlur={() => setShowEmptyScreen(false)}
           />
 
-          <div className="flex items-center justify-between px-3 pb-3">
-            <div className="flex items-center gap-1">
+          <div className="flex items-center justify-between px-3 pb-3 gap-2">
+            <div className="flex items-center gap-2 flex-1">
               <FileUpload disabled={isLoading} />
-              <div className="h-6 w-px bg-border mx-1" />
-              <GenerationButtons disabled={isLoading} />
-              <div className="h-6 w-px bg-border mx-1" />
-              <ModelSelector models={models || []} />
-              <SearchModeToggle />
+              
+              <div className="h-5 w-px bg-border/50" />
+              
+              <div className="flex items-center gap-1 px-1 py-0.5 rounded-full bg-background/50">
+                <GenerationButtons disabled={isLoading} />
+              </div>
+              
+              <div className="h-5 w-px bg-border/50" />
+              
+              <div className="flex items-center gap-1">
+                <ModelSelector models={models || []} />
+                <SearchModeToggle />
+              </div>
             </div>
+            
             <div className="flex items-center gap-2">
               {messages.length > 0 && (
                 <Button
                   variant="outline"
                   size="icon"
                   onClick={handleNewChat}
-                  className="shrink-0 rounded-full group"
+                  className="shrink-0 rounded-full group size-8"
                   type="button"
                   disabled={isLoading || isToolInvocationInProgress()}
                 >
@@ -203,14 +212,14 @@ export function ChatPanel({
                 type={isLoading ? 'button' : 'submit'}
                 size={'icon'}
                 variant={'outline'}
-                className={cn(isLoading && 'animate-pulse', 'rounded-full')}
+                className={cn(isLoading && 'animate-pulse', 'rounded-full size-8')}
                 disabled={
                   (input.length === 0 && !isLoading) ||
                   isToolInvocationInProgress()
                 }
                 onClick={isLoading ? stop : undefined}
               >
-                {isLoading ? <Square size={20} /> : <ArrowUp size={20} />}
+                {isLoading ? <Square size={18} /> : <ArrowUp size={18} />}
               </Button>
             </div>
           </div>
