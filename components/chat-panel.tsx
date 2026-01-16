@@ -1,4 +1,4 @@
-'use server'
+'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import Textarea from 'react-textarea-autosize'
