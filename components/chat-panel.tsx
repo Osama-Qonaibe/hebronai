@@ -17,6 +17,7 @@ import { EmptyScreen } from './empty-screen'
 import { FileUpload } from './file-upload'
 import { ModelSelector } from './model-selector'
 import { SearchModeToggle } from './search-mode-toggle'
+import { GenerationButtons } from './generation-buttons'
 
 interface ChatPanelProps {
   input: string
@@ -179,6 +180,8 @@ export function ChatPanel({
           <div className="flex items-center justify-between px-3 pb-3">
             <div className="flex items-center gap-1">
               <FileUpload disabled={isLoading} />
+              <div className="h-6 w-px bg-border mx-1" />
+              <GenerationButtons disabled={isLoading} />
               <div className="h-6 w-px bg-border mx-1" />
               <ModelSelector models={models || []} />
               <SearchModeToggle />
