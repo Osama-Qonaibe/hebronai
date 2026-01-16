@@ -1,10 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Image, Video, Mic, Globe } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+
+import { Globe, Image, Mic, Video } from 'lucide-react'
+
 import { GenerationMode } from '@/lib/types/generation'
 import { cn } from '@/lib/utils'
+
+import { Button } from '@/components/ui/button'
 
 interface GenerationButtonsProps {
   disabled?: boolean
