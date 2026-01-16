@@ -1,4 +1,4 @@
-import { CheckCircle2, Globe, Heart, Rocket, Sparkles, Target } from 'lucide-react'
+import { CheckCircle2, Code2, Globe, Heart, Rocket, Sparkles, Target } from 'lucide-react'
 
 export default function AboutPage() {
   const goals = [
@@ -35,6 +35,11 @@ export default function AboutPage() {
       icon: Rocket,
       title: 'Fast & Reliable',
       description: 'Optimized for the best experience'
+    },
+    {
+      icon: Code2,
+      title: 'Build Apps Easily',
+      description: 'Create websites and applications effortlessly with AI assistance'
     }
   ]
 
