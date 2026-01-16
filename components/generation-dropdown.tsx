@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import { Sparkles } from 'lucide-react'
 
 import { GenerationMode } from '@/lib/types/generation'
@@ -49,8 +51,8 @@ export function GenerationDropdown({
   disabled,
   onSelect
 }: GenerationDropdownProps) {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const [selectedMode, setSelectedMode] = React.useState<GenerationMode | null>(
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedMode, setSelectedMode] = useState<GenerationMode | null>(
     null
   )
 
