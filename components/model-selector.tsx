@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Check, ChevronsUpDown, Lightbulb } from 'lucide-react'
 
 import { Model } from '@/lib/types/models'
+import { cn } from '@/lib/utils'
 import { getCookie, setCookie } from '@/lib/utils/cookies'
 import { isReasoningModel } from '@/lib/utils/registry'
 
@@ -76,6 +77,7 @@ export function ModelSelector({ models }: ModelSelectorProps) {
 
   const selectedModel = models.find(model => createModelId(model) === value)
   const groupedModels = groupModelsByProvider(models)
+  const hasSelection = !!selectedModel
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -83,27 +85,33 @@ export function ModelSelector({ models }: ModelSelectorProps) {
         <Button
           variant="outline"
           role="combobox"
+          size="sm"
           aria-expanded={open}
-          className="text-sm rounded-full shadow-none focus:ring-0"
+          className={cn(
+            'h-8 px-3 rounded-full transition-all duration-200',
+            hasSelection || open
+              ? 'bg-green-500/10 hover:bg-green-500/20 border-green-500/30 text-green-600 dark:text-green-400'
+              : 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 text-purple-600 dark:text-purple-400'
+          )}
         >
           {selectedModel ? (
             <div className="flex items-center space-x-1">
               <Image
                 src={`/providers/logos/${selectedModel.providerId}.svg`}
                 alt={selectedModel.provider}
-                width={18}
-                height={18}
+                width={14}
+                height={14}
                 className="bg-white rounded-full border"
               />
               <span className="text-xs font-medium">{selectedModel.name}</span>
               {isReasoningModel(selectedModel.id) && (
-                <Lightbulb size={12} className="text-accent-blue-foreground" />
+                <Lightbulb size={12} className="text-current" />
               )}
             </div>
           ) : (
-            'Select model'
+            <span className="text-xs font-medium">Select model</span>
           )}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ml-1.5 h-3.5 w-3.5 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-72 p-0" align="start">
