@@ -1,7 +1,8 @@
 'use client'
 
-import { BadgeCheck, Building2, Crown, GraduationCap, Rocket, Sparkles, Users, Zap } from 'lucide-react'
 import Link from 'next/link'
+
+import { BadgeCheck, Building2, Crown, GraduationCap, Rocket, Sparkles, Users, Zap } from 'lucide-react'
 
 export default function PricingPage() {
   const plans = [
@@ -206,7 +207,7 @@ export default function PricingPage() {
           <section className="text-center space-y-6 py-8">
             <h2 className="text-3xl font-bold">Still have questions?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Contact us and we'll help you find the perfect plan for your needs.
+              Contact us and we&apos;ll help you find the perfect plan for your needs.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link
