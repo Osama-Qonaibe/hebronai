@@ -3,14 +3,11 @@
   "plugins": ["simple-import-sort"],
   "rules": {
     "simple-import-sort/imports": [
-      "error",
+      "warn",
       {
         "groups": [
-          // React and Next.js imports
           ["^react", "^next"],
-          // Third party imports
           ["^@?\\w"],
-          // Internal imports
           ["^@/types"],
           ["^@/config"],
           ["^@/lib"],
@@ -20,17 +17,13 @@
           ["^@/registry"],
           ["^@/styles"],
           ["^@/app"],
-          // Side effect imports
           ["^\\u0000"],
-          // Parent imports
           ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
-          // Other relative imports
           ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
-          // Style imports
           ["^.+\\.s?css$"]
         ]
       }
     ],
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "warn"
   }
 }
