@@ -1,8 +1,12 @@
 {
-  "name": "morphic",
+  "name": "hebronai",
   "version": "0.1.0",
   "private": true,
   "license": "Apache-2.0",
+  "author": "Osama Qonaibe",
+  "contributors": [
+    "Yoshiki Miura (Original Morphic project)"
+  ],
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
