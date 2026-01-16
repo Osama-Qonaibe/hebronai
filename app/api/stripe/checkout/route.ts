@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+
 import { createCheckoutSession, createCustomer } from '@/lib/stripe/server'
 import { STRIPE_CONFIG } from '@/lib/stripe/config'
+import { createClient } from '@/lib/supabase/server'
 
 export async function POST(req: Request) {
   try {

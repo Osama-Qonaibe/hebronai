@@ -1,4 +1,5 @@
 import { loadStripe, Stripe } from '@stripe/stripe-js'
+
 import { STRIPE_CONFIG } from './config'
 
 let stripePromise: Promise<Stripe | null>
