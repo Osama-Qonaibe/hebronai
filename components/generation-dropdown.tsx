@@ -53,12 +53,13 @@ export function GenerationDropdown({
       <DropdownMenuTrigger asChild>
         <Button
           type="button"
-          variant="ghost"
-          size="icon"
-          className="size-8 rounded-full"
+          variant="outline"
+          size="sm"
+          className="h-8 px-3 rounded-full bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-indigo-500/10 hover:from-pink-500/20 hover:via-purple-500/20 hover:to-indigo-500/20 border-purple-500/20 text-purple-600 dark:text-purple-400"
           disabled={disabled}
         >
-          <Sparkles className="size-4 text-muted-foreground" />
+          <Sparkles className="size-3.5 mr-1.5" />
+          <span className="text-xs font-medium">Generate</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-56">
