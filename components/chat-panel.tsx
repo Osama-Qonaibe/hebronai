@@ -15,7 +15,7 @@ import { Button } from './ui/button'
 import { IconLogo } from './ui/icons'
 import { EmptyScreen } from './empty-screen'
 import { FileUpload } from './file-upload'
-import { GenerationButtons } from './generation-buttons'
+import { GenerationDropdown } from './generation-dropdown'
 import { ModelSelector } from './model-selector'
 import { SearchModeToggle } from './search-mode-toggle'
 
@@ -177,24 +177,15 @@ export function ChatPanel({
             onBlur={() => setShowEmptyScreen(false)}
           />
 
-          <div className="flex items-center justify-between px-3 pb-3 gap-2">
-            <div className="flex items-center gap-2 flex-1">
+          <div className="flex items-center justify-between px-3 pb-3">
+            <div className="flex items-center gap-2">
               <FileUpload disabled={isLoading} />
-              
-              <div className="h-5 w-px bg-border/50" />
-              
-              <div className="flex items-center gap-1 px-1 py-0.5 rounded-full bg-background/50">
-                <GenerationButtons disabled={isLoading} />
-              </div>
-              
-              <div className="h-5 w-px bg-border/50" />
-              
-              <div className="flex items-center gap-1">
-                <ModelSelector models={models || []} />
-                <SearchModeToggle />
-              </div>
+              <div className="h-5 w-px bg-border" />
+              <GenerationDropdown disabled={isLoading} />
+              <div className="h-5 w-px bg-border" />
+              <ModelSelector models={models || []} />
+              <SearchModeToggle />
             </div>
-            
             <div className="flex items-center gap-2">
               {messages.length > 0 && (
                 <Button
