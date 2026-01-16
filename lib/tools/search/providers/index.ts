@@ -30,9 +30,9 @@ export function createSearchProvider(
   }
 }
 
+export type { ExaSearchProvider } from './exa'
+export type { FirecrawlSearchProvider } from './firecrawl'
 export { SearXNGSearchProvider } from './searxng'
 export { SerperSearchProvider } from './serper'
 export { TavilySearchProvider } from './tavily'
-export type { ExaSearchProvider } from './exa'
-export type { FirecrawlSearchProvider } from './firecrawl'
 export type { SearchProvider }
