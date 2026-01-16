@@ -2,6 +2,7 @@
 
 import type { ToolInvocation } from 'ai'
 
+import { CodeInterpreterArtifactContent } from '@/components/artifact/code-interpreter-artifact-content'
 import { RetrieveArtifactContent } from '@/components/artifact/retrieve-artifact-content'
 import { SearchArtifactContent } from '@/components/artifact/search-artifact-content'
 import { VideoSearchArtifactContent } from '@/components/artifact/video-search-artifact-content'
@@ -18,6 +19,8 @@ export function ToolInvocationContent({
       return <RetrieveArtifactContent tool={toolInvocation} />
     case 'videoSearch':
       return <VideoSearchArtifactContent tool={toolInvocation} />
+    case 'code_interpreter':
+      return <CodeInterpreterArtifactContent tool={toolInvocation} />
     default:
       return <div className="p-4">Details for this tool are not available</div>
   }
