@@ -16,15 +16,12 @@ import { ChatHistorySkeleton } from './chat-history-skeleton'
 import { ChatMenuItem } from './chat-menu-item'
 import { ClearHistoryAction } from './clear-history-action'
 
-// interface ChatHistoryClientProps {} // Removed empty interface
-
 interface ChatPageResponse {
   chats: Chat[]
   nextOffset: number | null
 }
 
 export function ChatHistoryClient() {
-  // Removed props from function signature
   const [chats, setChats] = useState<Chat[]>([])
   const [nextOffset, setNextOffset] = useState<number | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -125,7 +122,7 @@ export function ChatHistoryClient() {
       </SidebarGroup>
       <div className="flex-1 overflow-y-auto mb-2 relative">
         {isHistoryEmpty && !isPending ? (
-          <div className="px-2 text-foreground/30 text-sm text-center py-4">
+          <div className="px-2 text-muted-foreground text-sm text-center py-4">
             No search history
           </div>
         ) : (
