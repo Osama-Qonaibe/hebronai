@@ -2,9 +2,9 @@ import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
+import { createClient } from '@/lib/supabase/server'
 import { STRIPE_CONFIG } from '@/lib/stripe/config'
 import { stripe } from '@/lib/stripe/server'
-import { createClient } from '@/lib/supabase/server'
 
 export async function POST(req: Request) {
   const body = await req.text()
