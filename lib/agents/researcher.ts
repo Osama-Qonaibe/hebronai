@@ -1,5 +1,6 @@
 import { CoreMessage, smoothStream, streamText } from 'ai'
 
+import { codeInterpreterTool } from '../tools/code-interpreter'
 import { createQuestionTool } from '../tools/question'
 import { retrieveTool } from '../tools/retrieve'
 import { createSearchTool } from '../tools/search'
@@ -9,29 +10,24 @@ import { getModel } from '../utils/registry'
 const SYSTEM_PROMPT = `
 Instructions:
 
-You are a helpful AI assistant with access to real-time web search, content retrieval, video search capabilities, and the ability to ask clarifying questions.
+You are a helpful AI assistant with access to real-time web search, content retrieval, video search, and code execution capabilities.
 
 When asked a question, you should:
-1. First, determine if you need more information to properly understand the user's query
-2. **If the query is ambiguous or lacks specific details, use the ask_question tool to create a structured question with relevant options**
-3. If you have enough information, search for relevant information using the search tool when needed
-4. Use the retrieve tool to get detailed content from specific URLs
-5. Use the video search tool when looking for video content
-6. Analyze all search results to provide accurate, up-to-date information
-7. Always cite sources using the [number](url) format, matching the order of search results. If multiple sources are relevant, include all of them, and comma separate them. Only use information that has a URL available for citation.
-8. If results are not relevant or helpful, rely on your general knowledge
-9. Provide comprehensive and detailed responses based on search results, ensuring thorough coverage of the user's question
-10. Use markdown to structure your responses. Use headings to break up the content into sections.
-11. **Use the retrieve tool only with user-provided URLs.**
+1. Determine if you need more information
+2. Use ask_question tool for ambiguity
+3. Use search tool for real-time info
+4. Use retrieve tool for specific URL content
+5. Use videoSearch tool for videos
+6. Use code_interpreter tool to execute Python or JavaScript code for calculations, data analysis, or logic verification
+7. Cite sources using [number](url)
+8. Analyze results to provide accurate answers
+9. Structure responses with markdown and headings
+10. Use retrieve tool only with user-provided URLs
 
-When using the ask_question tool:
-- Create clear, concise questions
-- Provide relevant predefined options
-- Enable free-form input when appropriate
-- Match the language to the user's language (except option values which must be in English)
-
-Citation Format:
-[number](url)
+When using code_interpreter:
+- Write clean, efficient code
+- Use it for complex math, data processing, or simulating logic
+- Explain the logic before or after execution
 `
 
 type ResearcherReturn = Parameters<typeof streamText>[0]
@@ -47,8 +43,6 @@ export function researcher({
 }): ResearcherReturn {
   try {
     const currentDate = new Date().toLocaleString()
-
-    // Create model-specific tools
     const searchTool = createSearchTool(model)
     const videoSearchTool = createVideoSearchTool(model)
     const askQuestionTool = createQuestionTool(model)
@@ -61,16 +55,17 @@ export function researcher({
         search: searchTool,
         retrieve: retrieveTool,
         videoSearch: videoSearchTool,
-        ask_question: askQuestionTool
+        ask_question: askQuestionTool,
+        code_interpreter: codeInterpreterTool
       },
       experimental_activeTools: searchMode
-        ? ['search', 'retrieve', 'videoSearch', 'ask_question']
+        ? ['search', 'retrieve', 'videoSearch', 'ask_question', 'code_interpreter']
         : [],
       maxSteps: searchMode ? 5 : 1,
       experimental_transform: smoothStream()
     }
   } catch (error) {
-    console.error('Error in chatResearcher:', error)
+    console.error('Error in researcher agent:', error)
     throw error
   }
 }
