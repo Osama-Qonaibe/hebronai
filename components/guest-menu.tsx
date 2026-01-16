@@ -2,12 +2,7 @@
 
 import Link from 'next/link'
 
-import {
-  Link2,
-  LogIn,
-  Palette,
-  Settings2 // Or EllipsisVertical, etc.
-} from 'lucide-react'
+import { Link2, LogIn, Palette, Settings2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -29,7 +24,7 @@ export default function GuestMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Settings2 className="h-5 w-5" /> {/* Choose an icon */}
+          <Settings2 className="h-5 w-5" />
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
