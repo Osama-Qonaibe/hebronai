@@ -37,18 +37,38 @@ export const registry = createProviderRegistry({
     apiKey: process.env.OPENAI_COMPATIBLE_API_KEY,
     baseURL: process.env.OPENAI_COMPATIBLE_API_BASE_URL
   }),
-  xai
+  xai,
+  perplexity: createOpenAI({
+    apiKey: process.env.PERPLEXITY_API_KEY,
+    baseURL: 'https://api.perplexity.ai'
+  }),
+  together: createOpenAI({
+    apiKey: process.env.TOGETHER_API_KEY,
+    baseURL: 'https://api.together.xyz/v1'
+  }),
+  openrouter: createOpenAI({
+    apiKey: process.env.OPENROUTER_API_KEY,
+    baseURL: 'https://openrouter.ai/api/v1'
+  }),
+  mistral: createOpenAI({
+    apiKey: process.env.MISTRAL_API_KEY,
+    baseURL: 'https://api.mistral.ai/v1'
+  }),
+  cohere: createOpenAI({
+    apiKey: process.env.COHERE_API_KEY,
+    baseURL: 'https://api.cohere.ai/v1'
+  })
 })
 
 export function getModel(model: string) {
   const [provider, ...modelNameParts] = model.split(':') ?? []
   const modelName = modelNameParts.join(':')
+  
   if (model.includes('ollama')) {
     const ollama = createOllama({
       baseURL: `${process.env.OLLAMA_BASE_URL}/api`
     })
 
-    // if model is deepseek-r1, add reasoning middleware
     if (model.includes('deepseek-r1')) {
       return wrapLanguageModel({
         model: ollama(modelName),
@@ -58,13 +78,11 @@ export function getModel(model: string) {
       })
     }
 
-    // if ollama provider, set simulateStreaming to true
     return ollama(modelName, {
       simulateStreaming: true
     })
   }
 
-  // if model is groq and includes deepseek-r1, add reasoning middleware
   if (model.includes('groq') && model.includes('deepseek-r1')) {
     return wrapLanguageModel({
       model: groq(modelName),
@@ -74,7 +92,6 @@ export function getModel(model: string) {
     })
   }
 
-  // if model is fireworks and includes deepseek-r1, add reasoning middleware
   if (model.includes('fireworks') && model.includes('deepseek-r1')) {
     return wrapLanguageModel({
       model: fireworks(modelName),
@@ -109,6 +126,16 @@ export function isProviderEnabled(providerId: string): boolean {
       return !!process.env.FIREWORKS_API_KEY
     case 'xai':
       return !!process.env.XAI_API_KEY
+    case 'perplexity':
+      return !!process.env.PERPLEXITY_API_KEY
+    case 'together':
+      return !!process.env.TOGETHER_API_KEY
+    case 'openrouter':
+      return !!process.env.OPENROUTER_API_KEY
+    case 'mistral':
+      return !!process.env.MISTRAL_API_KEY
+    case 'cohere':
+      return !!process.env.COHERE_API_KEY
     case 'openai-compatible':
       return (
         !!process.env.OPENAI_COMPATIBLE_API_KEY &&
@@ -147,7 +174,6 @@ export function isToolCallSupported(model?: string) {
   const modelName = modelNameParts.join(':')
 
   if (provider === 'ollama') {
-    // Ollama models are dynamically checked for tools capability
     return true
   }
 
@@ -155,8 +181,6 @@ export function isToolCallSupported(model?: string) {
     return false
   }
 
-  // Deepseek R1 is not supported
-  // Deepseek v3's tool call is unstable, so we include it in the list
   return !modelName?.includes('deepseek')
 }
 
