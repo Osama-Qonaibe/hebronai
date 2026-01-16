@@ -21,7 +21,6 @@ export async function getChatsPage(
   limit = 20,
   offset = 0
 ): Promise<{ chats: Chat[]; nextOffset: number | null }> {
-  // Simple pagination implementation for Supabase
   const chats = await getSupabaseChats(userId)
   const slicedChats = chats.slice(offset, offset + limit)
   const nextOffset = chats.length > offset + limit ? offset + limit : null

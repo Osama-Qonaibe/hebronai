@@ -1,5 +1,6 @@
-import { BaseSearchProvider } from './base'
 import { SearchResults } from '@/lib/types'
+
+import { BaseSearchProvider } from './base'
 
 export class SerperSearchProvider extends BaseSearchProvider {
   async search(
@@ -29,7 +30,6 @@ export class SerperSearchProvider extends BaseSearchProvider {
 
     const data = await response.json()
     
-    // Transform Serper results to common SearchResults format
     const results = (data.organic || []).map((item: any) => ({
       title: item.title,
       url: item.link,
