@@ -1,3 +1,5 @@
+'use client'
+
 import { BadgeCheck, Building2, Crown, GraduationCap, Rocket, Sparkles, Users, Zap } from 'lucide-react'
 import Link from 'next/link'
 
