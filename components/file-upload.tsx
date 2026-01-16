@@ -48,6 +48,7 @@ export function FileUpload({ onUploadComplete, disabled }: FileUploadProps) {
   const [files, setFiles] = useState<File[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [currentFileType, setCurrentFileType] = useState<FileType>('document')
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -86,9 +87,11 @@ export function FileUpload({ onUploadComplete, disabled }: FileUploadProps) {
     }
   }
 
+  const hasFiles = files.length > 0
+
   return (
     <>
-      {files.length > 0 && (
+      {hasFiles && (
         <div className="flex flex-wrap gap-2 px-4 mb-2">
           {files.map((file, i) => (
             <div
@@ -129,13 +132,18 @@ export function FileUpload({ onUploadComplete, disabled }: FileUploadProps) {
         className="hidden"
         accept={FILE_TYPE_CONFIG[currentFileType].accept}
       />
-      <DropdownMenu>
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
         <DropdownMenuTrigger asChild>
           <Button
             type="button"
             variant="outline"
             size="sm"
-            className="h-8 px-3 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 text-purple-600 dark:text-purple-400"
+            className={cn(
+              'h-8 px-3 rounded-full transition-all duration-200',
+              hasFiles || isOpen
+                ? 'bg-green-500/10 hover:bg-green-500/20 border-green-500/30 text-green-600 dark:text-green-400'
+                : 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 text-purple-600 dark:text-purple-400'
+            )}
             disabled={disabled || uploading}
           >
             <Paperclip className="size-3.5 mr-1.5" />
