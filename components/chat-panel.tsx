@@ -13,8 +13,11 @@ import { cn } from '@/lib/utils'
 import { useArtifact } from './artifact/artifact-context'
 import { Button } from './ui/button'
 import { IconLogo } from './ui/icons'
+import { DesignDropdown } from './design-dropdown'
+import { DevDropdown } from './dev-dropdown'
 import { EmptyScreen } from './empty-screen'
 import { FileUpload } from './file-upload'
+import { FinanceDropdown } from './finance-dropdown'
 import { GenerationDropdown } from './generation-dropdown'
 import { ModelSelector } from './model-selector'
 import { SearchModeToggle } from './search-mode-toggle'
@@ -182,6 +185,10 @@ export function ChatPanel({
               <FileUpload disabled={isLoading} />
               <div className="h-5 w-px bg-border" />
               <GenerationDropdown disabled={isLoading} />
+              <div className="h-5 w-px bg-border" />
+              <FinanceDropdown disabled={isLoading} />
+              <DesignDropdown disabled={isLoading} />
+              <DevDropdown disabled={isLoading} />
               <div className="h-5 w-px bg-border" />
               <ModelSelector models={models || []} />
               <SearchModeToggle />
