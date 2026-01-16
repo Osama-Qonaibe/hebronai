@@ -6,7 +6,9 @@ export interface Model {
   enabled: boolean
   toolCallType: 'native' | 'manual'
   toolCallModel?: string
-  // Ollama-specific fields (only added when needed)
+  tier?: 'free' | 'paid' | 'trial'
+  category?: 'premium' | 'reasoning' | 'fast' | 'vision' | 'realtime'
+  releaseDate?: string
   capabilities?: string[]
   contextWindow?: number
 }
