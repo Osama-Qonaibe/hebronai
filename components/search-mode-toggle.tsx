@@ -32,16 +32,16 @@ export function SearchModeToggle() {
       pressed={isSearchMode}
       onPressedChange={handleSearchModeChange}
       variant="outline"
+      size="sm"
       className={cn(
-        'gap-1 px-3 border border-input text-muted-foreground bg-background',
-        'data-[state=on]:bg-accent-blue',
-        'data-[state=on]:text-accent-blue-foreground',
-        'data-[state=on]:border-accent-blue-border',
-        'hover:bg-accent hover:text-accent-foreground rounded-full'
+        'h-8 px-3 rounded-full transition-all duration-200',
+        isSearchMode
+          ? 'bg-green-500/10 hover:bg-green-500/20 border-green-500/30 text-green-600 dark:text-green-400'
+          : 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 text-purple-600 dark:text-purple-400'
       )}
     >
-      <Globe className="size-4" />
-      <span className="text-xs">Search</span>
+      <Globe className="size-3.5 mr-1.5" />
+      <span className="text-xs font-medium">Search</span>
     </Toggle>
   )
 }
