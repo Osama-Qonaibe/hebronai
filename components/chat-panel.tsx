@@ -14,6 +14,7 @@ import { useArtifact } from './artifact/artifact-context'
 import { Button } from './ui/button'
 import { IconLogo } from './ui/icons'
 import { EmptyScreen } from './empty-screen'
+import { FileUpload } from './file-upload'
 import { ModelSelector } from './model-selector'
 import { SearchModeToggle } from './search-mode-toggle'
 
@@ -28,9 +29,7 @@ interface ChatPanelProps {
   stop: () => void
   append: (message: any) => void
   models?: Model[]
-  /** Whether to show the scroll to bottom button */
   showScrollToBottomButton: boolean
-  /** Reference to the scroll container */
   scrollContainerRef: React.RefObject<HTMLDivElement>
 }
 
@@ -52,8 +51,8 @@ export function ChatPanel({
   const router = useRouter()
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const isFirstRender = useRef(true)
-  const [isComposing, setIsComposing] = useState(false) // Composition state
-  const [enterDisabled, setEnterDisabled] = useState(false) // Disable Enter after composition ends
+  const [isComposing, setIsComposing] = useState(false)
+  const [enterDisabled, setEnterDisabled] = useState(false)
   const { close: closeArtifact } = useArtifact()
 
   const handleCompositionStart = () => setIsComposing(true)
@@ -87,7 +86,6 @@ export function ChatPanel({
     )
   }
 
-  // if query is not empty, submit the query
   useEffect(() => {
     if (isFirstRender.current && query && query.trim().length > 0) {
       append({
@@ -96,10 +94,8 @@ export function ChatPanel({
       })
       isFirstRender.current = false
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
 
-  // Scroll to the bottom of the container
   const handleScrollToBottom = () => {
     const scrollContainer = scrollContainerRef.current
     if (scrollContainer) {
@@ -129,7 +125,6 @@ export function ChatPanel({
         onSubmit={handleSubmit}
         className={cn('max-w-3xl w-full mx-auto relative')}
       >
-        {/* Scroll to bottom button - only shown when showScrollToBottomButton is true */}
         {showScrollToBottomButton && messages.length > 0 && (
           <Button
             type="button"
@@ -181,9 +176,9 @@ export function ChatPanel({
             onBlur={() => setShowEmptyScreen(false)}
           />
 
-          {/* Bottom menu area */}
           <div className="flex items-center justify-between p-3">
             <div className="flex items-center gap-2">
+              <FileUpload disabled={isLoading} />
               <ModelSelector models={models || []} />
               <SearchModeToggle />
             </div>
