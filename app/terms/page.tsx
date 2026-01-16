@@ -1,4 +1,4 @@
-import { AlertCircle, Shield, Scale, FileText, Lock, UserCheck, Info } from 'lucide-react'
+import { AlertCircle, FileText, Info, Lock, Scale, Shield, UserCheck } from 'lucide-react'
 
 export default function TermsPage() {
   const sections = [
