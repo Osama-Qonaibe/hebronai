@@ -1,4 +1,5 @@
 import { tool } from 'ai'
+
 import { codeInterpreterSchema } from '@/lib/schema/code-interpreter'
 
 export const codeInterpreterTool = tool({

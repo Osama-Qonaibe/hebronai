@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import { useEffect, useRef, useState } from 'react'
 import Textarea from 'react-textarea-autosize'
@@ -94,7 +94,7 @@ export function ChatPanel({
       })
       isFirstRender.current = false
     }
-  }, [query])
+  }, [query, append])
 
   const handleScrollToBottom = () => {
     const scrollContainer = scrollContainerRef.current
