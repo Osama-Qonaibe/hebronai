@@ -3,7 +3,7 @@
   "plugins": ["simple-import-sort"],
   "rules": {
     "simple-import-sort/imports": [
-      "warn",
+      "error",
       {
         "groups": [
           ["^react", "^next"],
@@ -24,6 +24,6 @@
         ]
       }
     ],
-    "simple-import-sort/exports": "warn"
+    "simple-import-sort/exports": "error"
   }
 }
