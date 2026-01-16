@@ -3,14 +3,14 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { type Chat } from '@/lib/types'
 import {
-  getSupabaseChats,
-  getSupabaseChat,
-  saveSupabaseChat,
+  clearSupabaseChats,
   deleteSupabaseChat,
-  clearSupabaseChats
+  getSupabaseChat,
+  getSupabaseChats,
+  saveSupabaseChat
 } from '@/lib/db/supabase-history'
+import { type Chat } from '@/lib/types'
 
 export async function getChats(userId?: string | null) {
   return await getSupabaseChats(userId)

@@ -1,9 +1,9 @@
 import { SearchProvider } from './base'
 import { ExaSearchProvider } from './exa'
 import { FirecrawlSearchProvider } from './firecrawl'
+import { SerperSearchProvider } from './serper'
 import { SearXNGSearchProvider } from './searxng'
 import { TavilySearchProvider } from './tavily'
-import { SerperSearchProvider } from './serper'
 
 export type SearchProviderType = 'tavily' | 'exa' | 'searxng' | 'firecrawl' | 'serper'
 export const DEFAULT_PROVIDER: SearchProviderType = 'tavily'
@@ -30,9 +30,9 @@ export function createSearchProvider(
   }
 }
 
-export type { ExaSearchProvider } from './exa'
-export type { FirecrawlSearchProvider } from './firecrawl'
+export type { SearchProvider }
+export { SerperSearchProvider } from './serper'
 export { SearXNGSearchProvider } from './searxng'
 export { TavilySearchProvider } from './tavily'
-export { SerperSearchProvider } from './serper'
-export type { SearchProvider }
+export type { ExaSearchProvider } from './exa'
+export type { FirecrawlSearchProvider } from './firecrawl'

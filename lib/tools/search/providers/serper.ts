@@ -1,5 +1,5 @@
-import { SearchResults } from '@/lib/types'
 import { BaseSearchProvider } from './base'
+import { SearchResults } from '@/lib/types'
 
 export class SerperSearchProvider extends BaseSearchProvider {
   async search(
