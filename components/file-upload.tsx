@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useRef, useState } from 'react'
-
 import { FileUp, Loader2, X } from 'lucide-react'
 import { toast } from 'sonner'
 
