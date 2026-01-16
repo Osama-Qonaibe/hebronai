@@ -58,7 +58,7 @@ export default function BlogPage() {
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
               Artificial Intelligence has evolved from a futuristic concept to an essential tool that empowers 
-              individuals and businesses worldwide. At HebronAI, we harness the capabilities of the world's most 
+              individuals and businesses worldwide. At HebronAI, we harness the capabilities of the world&apos;s most 
               advanced AI models to deliver unprecedented productivity and creativity.
             </p>
             <p>
