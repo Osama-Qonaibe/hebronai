@@ -57,6 +57,10 @@ export const registry = createProviderRegistry({
   cohere: createOpenAI({
     apiKey: process.env.COHERE_API_KEY,
     baseURL: 'https://api.cohere.ai/v1'
+  }),
+  alibaba: createOpenAI({
+    apiKey: process.env.ALIBABA_API_KEY,
+    baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
   })
 })
 
@@ -136,6 +140,8 @@ export function isProviderEnabled(providerId: string): boolean {
       return !!process.env.MISTRAL_API_KEY
     case 'cohere':
       return !!process.env.COHERE_API_KEY
+    case 'alibaba':
+      return !!process.env.ALIBABA_API_KEY
     case 'openai-compatible':
       return (
         !!process.env.OPENAI_COMPATIBLE_API_KEY &&
@@ -164,6 +170,8 @@ export function getToolCallModel(model?: string) {
       return getModel(`ollama:${ollamaModel}`)
     case 'google':
       return getModel('google:gemini-2.0-flash')
+    case 'alibaba':
+      return getModel('alibaba:qwen-turbo')
     default:
       return getModel('openai:gpt-4o-mini')
   }
@@ -191,6 +199,8 @@ export function isReasoningModel(model: string): boolean {
   return (
     model.includes('deepseek-r1') ||
     model.includes('deepseek-reasoner') ||
-    model.includes('o3-mini')
+    model.includes('o3-mini') ||
+    model.includes('o3') ||
+    model.includes('sonar-reasoning')
   )
 }
