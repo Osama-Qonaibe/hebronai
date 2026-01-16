@@ -12,16 +12,22 @@ export function validateModel(model: any): model is Model {
     typeof model.enabled === 'boolean' &&
     (model.toolCallType === 'native' || model.toolCallType === 'manual') &&
     (model.toolCallModel === undefined ||
-      typeof model.toolCallModel === 'string')
+      typeof model.toolCallModel === 'string') &&
+    (model.tier === undefined ||
+      model.tier === 'free' ||
+      model.tier === 'paid' ||
+      model.tier === 'trial') &&
+    (model.category === undefined ||
+      typeof model.category === 'string') &&
+    (model.releaseDate === undefined ||
+      typeof model.releaseDate === 'string')
   )
 }
 
 export async function getModels(): Promise<Model[]> {
   try {
-    // Get the base URL using the centralized utility function
     const baseUrlObj = await getBaseUrl()
 
-    // Construct the models.json URL
     const modelUrl = new URL('/config/models.json', baseUrlObj)
     console.log('Attempting to fetch models from:', modelUrl.toString())
 
@@ -44,7 +50,6 @@ export async function getModels(): Promise<Model[]> {
 
       const text = await response.text()
 
-      // Check if the response starts with HTML doctype
       if (text.trim().toLowerCase().startsWith('<!doctype')) {
         console.warn('Received HTML instead of JSON when fetching models')
         throw new Error('Received HTML instead of JSON')
@@ -56,7 +61,6 @@ export async function getModels(): Promise<Model[]> {
         staticModels = config.models
       }
     } catch (error: any) {
-      // Fallback to default models if fetch fails
       console.warn(
         'Fetch failed, falling back to default models:',
         error.message || 'Unknown error'
@@ -67,14 +71,12 @@ export async function getModels(): Promise<Model[]> {
         defaultModels.models.every(validateModel)
       ) {
         console.log('Successfully loaded default models')
-        staticModels = defaultModels.models
+        staticModels = defaultModels.models as Model[]
       }
     }
 
-    // Fetch Ollama models
     const ollamaModels = await fetchOllamaModels(baseUrlObj)
 
-    // Combine static and Ollama models
     const allModels = [...staticModels, ...ollamaModels]
 
     console.log(
@@ -85,14 +87,10 @@ export async function getModels(): Promise<Model[]> {
     console.warn('Failed to load models:', error)
   }
 
-  // Last resort: return empty array
   console.warn('All attempts to load models failed, returning empty array')
   return []
 }
 
-/**
- * Fetch Ollama models from the API endpoint
- */
 async function fetchOllamaModels(baseUrl: URL): Promise<Model[]> {
   try {
     const ollamaUrl = process.env.OLLAMA_BASE_URL
