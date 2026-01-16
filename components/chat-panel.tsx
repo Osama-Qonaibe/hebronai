@@ -12,12 +12,13 @@ import { cn } from '@/lib/utils'
 
 import { Button } from '@/components/ui/button'
 import { IconLogo } from '@/components/ui/icons'
+
+import { useArtifact } from './artifact/artifact-context'
 import { EmptyScreen } from './empty-screen'
 import { FileUpload } from './file-upload'
 import { GenerationButtons } from './generation-buttons'
 import { ModelSelector } from './model-selector'
 import { SearchModeToggle } from './search-mode-toggle'
-import { useArtifact } from './artifact/artifact-context'
 
 interface ChatPanelProps {
   input: string
