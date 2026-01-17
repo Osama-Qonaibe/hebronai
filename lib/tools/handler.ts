@@ -1,6 +1,6 @@
-import { createClient } from '@/lib/supabase/server'
 import { DesignTool, DevTool, FinanceTool } from '@/lib/types/tools'
 import { GenerationMode } from '@/lib/types/generation'
+import { createClient } from '@/lib/supabase/server'
 
 export type ToolCategory = 'generate' | 'finance' | 'design' | 'dev'
 
