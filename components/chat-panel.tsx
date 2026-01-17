@@ -13,8 +13,12 @@ import { cn } from '@/lib/utils'
 import { useArtifact } from './artifact/artifact-context'
 import { Button } from './ui/button'
 import { IconLogo } from './ui/icons'
+import { DesignDropdown } from './design-dropdown'
+import { DevDropdown } from './dev-dropdown'
 import { EmptyScreen } from './empty-screen'
 import { FileUpload } from './file-upload'
+import { FinanceDropdown } from './finance-dropdown'
+import { GenerationDropdown } from './generation-dropdown'
 import { ModelSelector } from './model-selector'
 import { SearchModeToggle } from './search-mode-toggle'
 
@@ -177,9 +181,15 @@ export function ChatPanel({
           />
 
           <div className="flex items-center justify-between px-3 pb-3">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <FileUpload disabled={isLoading} />
-              <div className="h-6 w-px bg-border mx-1" />
+              <div className="h-5 w-px bg-border" />
+              <GenerationDropdown disabled={isLoading} />
+              <div className="h-5 w-px bg-border" />
+              <FinanceDropdown disabled={isLoading} />
+              <DesignDropdown disabled={isLoading} />
+              <DevDropdown disabled={isLoading} />
+              <div className="h-5 w-px bg-border" />
               <ModelSelector models={models || []} />
               <SearchModeToggle />
             </div>
@@ -189,7 +199,7 @@ export function ChatPanel({
                   variant="outline"
                   size="icon"
                   onClick={handleNewChat}
-                  className="shrink-0 rounded-full group"
+                  className="shrink-0 rounded-full group size-8"
                   type="button"
                   disabled={isLoading || isToolInvocationInProgress()}
                 >
@@ -200,14 +210,14 @@ export function ChatPanel({
                 type={isLoading ? 'button' : 'submit'}
                 size={'icon'}
                 variant={'outline'}
-                className={cn(isLoading && 'animate-pulse', 'rounded-full')}
+                className={cn(isLoading && 'animate-pulse', 'rounded-full size-8')}
                 disabled={
                   (input.length === 0 && !isLoading) ||
                   isToolInvocationInProgress()
                 }
                 onClick={isLoading ? stop : undefined}
               >
-                {isLoading ? <Square size={20} /> : <ArrowUp size={20} />}
+                {isLoading ? <Square size={18} /> : <ArrowUp size={18} />}
               </Button>
             </div>
           </div>
